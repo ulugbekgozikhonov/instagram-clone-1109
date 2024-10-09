@@ -1,28 +1,23 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Your Birthday</title>
+    <title>Enter Confirmation Code</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <div class="container">
-        <div class="birthday-form">
+        <div class="confirmation-form">
             <div class="image">
-                <img class="aaa" src="{% static 'images/img2.png' %}" alt="Birthday Cake">
+                <img class="emaill" src="{% static 'images/email.png' %}" alt="Envelope Icon">
             </div>
-            <h2>Add Your Birthday</h2>
-            <p>This won't be a part of your public profile.</p>
-            <p><a href="#">Why do I need to provide my birthday?</a></p>
+            <h2>Enter Confirmation Code</h2>
+            <p>Enter the confirmation code we sent to <strong>your-email@gmail.com</strong>. <a href="#">Resend Code</a></p>
 
-            <form action="#" method="post">
-                {% csrf_token %}
-                <input type="date" name="birthday">
-
-                <p>You need to enter the date you were born</p>
+            <form action="#">
+                <input type="text" placeholder="Confirmation Code" required>
                 <button type="submit">Next</button>
             </form>
 

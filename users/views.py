@@ -1,9 +1,9 @@
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
 from .forms import SignupForm
-from .models import User
-from django.db.models import Q
+from .service import email_or_phone_number
 
 
 # def login_page(request):
@@ -28,6 +28,7 @@ def login_page(request):
 		password = request.POST.get("password")
 		user = authenticate(request, username=user_inp, password=password)
 		if user is not None:
+			login(request, user)
 			return HttpResponse("Successfully login")
 		else:
 			return HttpResponse("login or password error")
@@ -37,14 +38,18 @@ def login_page(request):
 
 def signup_page(request):
 	if request.method == "POST":
-		print("keldi")
 		form = SignupForm(data=request.POST)
 		if form.is_valid():
-			temp_user = {"user_login": form.cleaned_data.get("login"), "password": form.cleaned_data.get("password"),
-			             "full_name": form.cleaned_data.get("full_name"),
-			             "username": form.cleaned_data.get("username")}
-			request.session["temp_user"] = temp_user
-			print(request.session.get("temp_user"), "temp_user")
+			login_type = email_or_phone_number(form.cleaned_data.get('login'))
+			if login_type:
+				temp_user = {"user_login": form.cleaned_data.get("login"),
+				             "password": form.cleaned_data.get("password"),
+				             "full_name": form.cleaned_data.get("full_name"),
+				             "username": form.cleaned_data.get("username"),
+				             "login_type": login_type}
+				request.session["temp_user"] = temp_user
+			else:
+				return HttpResponse("invalid login")
 			return redirect('birthday')
 
 	else:
@@ -53,4 +58,14 @@ def signup_page(request):
 
 
 def birthday_page(request):
+	if request.method == "POST":
+		temp_user = request.session['temp_user']
+		login_type = temp_user.get('login_type')
+		user_login = temp_user.get('user_login')
+		temp_user['date_of_birth'] = request.POST.get('birthday')
+		if login_type == "EMAIL":
+			return render(request, 'email.html')
+		else:
+			return render(request, 'phone.html')
+
 	return render(request, "birthday.html")
