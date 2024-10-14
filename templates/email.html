@@ -8,41 +8,43 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <div class="container">
-        <div class="confirmation-form">
-            <div class="image">
-                <img class="emaill" src="{% static 'images/email.png' %}" alt="Envelope Icon">
-            </div>
-            <h2>Enter Confirmation Code</h2>
-            <p>Enter the confirmation code we sent to <strong>your-email@gmail.com</strong>. <a href="#">Resend Code</a></p>
-
-            <form action="#">
-                <input type="text" placeholder="Confirmation Code" required>
-                <button type="submit">Next</button>
-            </form>
-
-            <div class="go-back">
-                <a href="#">Go back</a>
-            </div>
+<div class="container">
+    <div class="confirmation-form">
+        <div class="image">
+            <img class="emaill" src="{% static 'images/email.png' %}" alt="Envelope Icon">
         </div>
+        <h2>Enter Confirmation Code</h2>
+        <p>Enter the confirmation code we sent to <strong>your-email@gmail.com</strong>. <a href="#">Resend Code</a></p>
 
-        <div class="login-link">
-            <p>Have an account? <a href="#">Log in</a></p>
+        <form action="{% url 'confirmation' %}" method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Confirmation Code" required name="code">
+
+            <button type="submit">Next</button>
+        </form>
+
+        <div class="go-back">
+            <a href="#">Go back</a>
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 Instagram from Meta</p>
-        <div class="footer-links">
-            <a href="#">Meta</a>
-            <a href="#">About</a>
-            <a href="#">Blog</a>
-            <a href="#">Jobs</a>
-            <a href="#">Help</a>
-            <a href="#">API</a>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
-        </div>
-    </footer>
+    <div class="login-link">
+        <p>Have an account? <a href="#">Log in</a></p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2024 Instagram from Meta</p>
+    <div class="footer-links">
+        <a href="#">Meta</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Jobs</a>
+        <a href="#">Help</a>
+        <a href="#">API</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+    </div>
+</footer>
 </body>
 </html>

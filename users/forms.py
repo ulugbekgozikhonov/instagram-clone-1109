@@ -15,8 +15,6 @@ class SignupForm(forms.Form):
 		widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
 	)
 
-
-
 	full_name = forms.CharField(
 		max_length=30,
 		required=True,
